@@ -1,4 +1,4 @@
-Напиши класс Car с указанными свойствами и методами.
+
 
 class Car {
   /*
@@ -6,7 +6,9 @@ class Car {
    * который принимает объект-машину как параметр и выводит
    * в консоль значения свойств maxSpeed, speed, isOn, distance и price.
    */
-
+  static getSpecs (car){
+    console.log(`maxSpeed: ${car.maxSpeed}, speed:${car.speed}, isOn: ${car.isOn}, distance: ${car.distance}, price: ${car._price}`);
+  }
   /*
    * Конструктор получает объект настроек.
    *
@@ -17,13 +19,15 @@ class Car {
    *  isOn - заведен ли автомобиль, значения true или false. Изначально false
    *  distance - общий киллометраж, изначально 0
    */
-  constructor({speed, price, maxSpeed, isOn, distance }) {
+  constructor({ maxSpeed, price }) {
       this.speed = 0;
       this._price = price;
       this.maxSpeed = maxSpeed;
       this.isOn = false;
       this.distance = 0;
   }
+
+
 
     get price(){
         return this._price;
@@ -32,6 +36,7 @@ class Car {
     set price(newPrice){
         this._price = newPrice;
     }
+  
 
   /*
    * Добавь код для того чтобы завести автомобиль
@@ -61,7 +66,7 @@ class Car {
   accelerate(value) {
       const newSpeed = this.speed + value;
       if (newSpeed <= this.maxSpeed){
-        this.speed = newSpeed;
+        this.speed = this.maxSpeed;
     }
   }
 
@@ -71,8 +76,10 @@ class Car {
    */
   decelerate(value) {
       const lowSpeed = this.speed - value;
-      if(lowSpeed >= 0)
-      this.speed = lowSpeed;
+      if(lowSpeed <= 0){
+        this.speed = 0;
+      }
+     
   }
 
   /*
